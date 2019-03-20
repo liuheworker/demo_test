@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -99,12 +100,12 @@ public class ExcelUtil {
      * @param list      数据 list，每个元素为一个 BaseRowModel
      * @param fileName  导出的文件名
      * @param sheetName 导入文件的 sheet 名
-     * @param object    映射实体类，Excel 模型
+     * @param t    映射实体类，Excel 模型
      */
     public static ExcelWriterFactroy writeExcelWithSheets(HttpServletResponse response, List<? extends BaseRowModel> list,
-                                                          String fileName, String sheetName, BaseRowModel object) {
+                                                          String fileName, String sheetName, Class<? extends BaseRowModel> t) {
         ExcelWriterFactroy writer = new ExcelWriterFactroy(getOutputStream(fileName, response), ExcelTypeEnum.XLSX);
-        Sheet sheet = new Sheet(1, 0, object.getClass());
+        Sheet sheet = new Sheet(1, 0, t);
         sheet.setSheetName(sheetName);
         writer.write(list, sheet);
         return writer;
@@ -121,7 +122,7 @@ public class ExcelUtil {
             if (!dbfFile.exists() || dbfFile.isDirectory()) {
                 dbfFile.createNewFile();
             }
-            fileName = new String(filePath.getBytes(), "ISO-8859-1");
+            fileName = new String(filePath.getBytes(), StandardCharsets.ISO_8859_1);
             response.addHeader("Content-Disposition", "filename=" + fileName);
             return response.getOutputStream();
         } catch (IOException e) {

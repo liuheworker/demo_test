@@ -47,14 +47,13 @@ public class ExcelListener extends AnalysisEventListener {
      * 根据业务自行实现该方法
      */
     private void doSomething() {
+        System.out.println("根据业务自行实现该方法---------");
     }
 
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
-        /*
-            datas.clear();
-            解析结束销毁不用的资源
-         */
+        datas.clear();
+        System.out.println("清空sheet");
     }
 
     public List<Object> getDatas() {

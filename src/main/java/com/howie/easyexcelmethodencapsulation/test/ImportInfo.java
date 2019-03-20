@@ -21,6 +21,8 @@ public class ImportInfo extends BaseRowModel {
     @ExcelProperty(index = 2)
     private String email;
 
+    @ExcelProperty(index = 3)
+    private String demo;
     /*
         作为 excel 的模型映射，需要 setter 方法
      */
@@ -48,12 +50,21 @@ public class ImportInfo extends BaseRowModel {
         this.email = email;
     }
 
+    public String getDemo() {
+        return demo;
+    }
+
+    public void setDemo(String demo) {
+        this.demo = demo;
+    }
+
     @Override
     public String toString() {
         return "Info{" +
                 "name='" + name + '\'' +
                 ", age='" + age + '\'' +
                 ", email='" + email + '\'' +
+                ", demo='" + demo + '\'' +
                 '}';
     }
 }

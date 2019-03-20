@@ -27,7 +27,9 @@ public class ExcelController {
      */
     @RequestMapping(value = "readExcelWithSheets", method = RequestMethod.POST)
     public Object readExcelWithSheets(MultipartFile excel) {
-        return ExcelUtil.readExcel(excel, new ImportInfo());
+        final List<Object> objects = ExcelUtil.readExcel(excel, new ImportInfo());
+        System.out.println(objects);
+        return objects;
     }
 
     /**
@@ -36,7 +38,10 @@ public class ExcelController {
     @RequestMapping(value = "readExcel", method = RequestMethod.POST)
     public Object readExcel(MultipartFile excel, int sheetNo,
                             @RequestParam(defaultValue = "1") int headLineNum) {
-        return ExcelUtil.readExcel(excel, new ImportInfo(), sheetNo, headLineNum);
+
+        final List<Object> objects = ExcelUtil.readExcel(excel, new ImportInfo(), sheetNo, headLineNum);
+        System.out.println(objects);
+        return objects;
     }
 
     /**
@@ -62,7 +67,7 @@ public class ExcelController {
         String sheetName2 = "第二个 sheet";
         String sheetName3 = "第三个 sheet";
 
-        ExcelUtil.writeExcelWithSheets(response, list, fileName, sheetName1, new ExportInfo())
+        ExcelUtil.writeExcelWithSheets(response, list, fileName, sheetName1, ExportInfo.class)
                 .write(list, sheetName2, new ExportInfo())
                 .write(list, sheetName3, new ExportInfo())
                 .finish();
