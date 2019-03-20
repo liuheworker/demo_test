@@ -52,5 +52,7 @@ public class HandlerMain {
         });
         t2.start();
 
+
+        System.out.println("kaishi ceshila");
     }
 }
